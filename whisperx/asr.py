@@ -221,13 +221,17 @@ class FasterWhisperPipeline(Pipeline):
                 percent_complete = base_progress / 2 if combined_progress else base_progress
                 print(f"Progress: {percent_complete:.2f}%...")
             text = out['text']
+            words = None
+            if 'words' in out:
+                words = out['words']
             if batch_size in [0, 1, None]:
                 text = text[0]
             segments.append(
                 {
                     "text": text,
                     "start": round(vad_segments[idx]['start'], 3),
-                    "end": round(vad_segments[idx]['end'], 3)
+                    "end": round(vad_segments[idx]['end'], 3),
+                    "words": words
                 }
             )
 
@@ -316,7 +320,7 @@ def load_model(whisper_arch,
         "suppress_tokens": [-1],
         "without_timestamps": True,
         "max_initial_timestamp": 0.0,
-        "word_timestamps": False,
+        "word_timestamps": True,
         "prepend_punctuations": "\"'“¿([{-",
         "append_punctuations": "\"'.。,，!！?？:：”)]}、",
         "suppress_numerals": False,
