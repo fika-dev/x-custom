@@ -49,6 +49,14 @@ class SegmentData(TypedDict):
     clean_wdx: List[int]   # Indices of words containing valid characters
     sentence_spans: List[Tuple[int, int]]  # Start and end indices of sentences
 
+class SingleAlignedWordSegment(TypedDict):
+    """
+    A single word of a speech with word alignment.
+    """
+    text: Optional[str]
+    word: Optional[str]
+    start: float
+    end: float
 
 class SingleAlignedSegment(TypedDict):
     """
