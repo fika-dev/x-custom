@@ -28,7 +28,17 @@ class SingleSegment(TypedDict):
     start: float
     end: float
     text: str
+    words: Optional[List[SingleWordSegment]]
 
+
+class SingleAlignedWordSegment(TypedDict):
+    """
+    A single word of a speech with word alignment.
+    """
+    text: Optional[str]
+    word: Optional[str]
+    start: float
+    end: float
 
 class SingleAlignedSegment(TypedDict):
     """
